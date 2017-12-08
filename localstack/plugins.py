@@ -2,7 +2,7 @@ from localstack.services.infra import (register_plugin, Plugin,
     start_s3, start_sns, start_ses, start_apigateway,
     start_elasticsearch_service, start_lambda, start_redshift, start_firehose,
     start_cloudwatch, start_cloudformation, start_dynamodbstreams, start_route53,
-    start_ssm)
+    start_ssm, start_kms)
 from localstack.services.apigateway import apigateway_listener
 from localstack.services.cloudformation import cloudformation_listener
 from localstack.services.dynamodb import dynamodb_listener, dynamodb_starter
@@ -62,6 +62,8 @@ def register_localstack_plugins():
             listener=cloudformation_listener.UPDATE_CLOUDFORMATION))
         register_plugin(Plugin('cloudwatch',
             start=start_cloudwatch))
+        register_plugin(Plugin('kms',
+            start=start_kms))
     except Exception as e:
         print('Unable to register plugins: %s' % e)
         raise e
